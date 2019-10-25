@@ -10,7 +10,7 @@ import UIKit
 
 class ImageZoomScrollView: UIScrollView {
 
-    var imageView: UIImageView!
+    private var imageView: UIImageView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -28,9 +28,7 @@ class ImageZoomScrollView: UIScrollView {
         imageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         addSubview(imageView)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(tap:)))
-        tap.numberOfTapsRequired = 2
-        addGestureRecognizer(tap)
+        setupDoubleTapGestureRecognizer()
     }
     
     @objc func handleDoubleTap(tap:UITapGestureRecognizer){
@@ -43,10 +41,16 @@ class ImageZoomScrollView: UIScrollView {
         }
     }
 
+    private func setupDoubleTapGestureRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(tap:)))
+        tap.numberOfTapsRequired = 2
+        addGestureRecognizer(tap)
+    }
+    
     private func centerContent() {
         let imageViewSize = imageView.frame.size
-
         var vertical:CGFloat = 0, horizontal:CGFloat = 0
+        
         if imageViewSize.width < bounds.size.width  {
             vertical = (bounds.size.width - imageViewSize.width) / 2.0
         }

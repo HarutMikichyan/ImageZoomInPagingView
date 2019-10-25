@@ -9,8 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var scrollView: UIScrollView!
-    var pageControl: UIPageControl!
+    private var scrollView: UIScrollView!
+    private var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
